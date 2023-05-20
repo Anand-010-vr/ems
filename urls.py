@@ -1,27 +1,22 @@
-from . import views
+"""ems URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from django.urls import path
-from django.views.generic.base import RedirectView
+from django.urls import path, include
 
 urlpatterns = [
-    path('redirect-admin', RedirectView.as_view(url="/admin"),name="redirect-admin"),
-    path('', views.home, name="home-page"),
-    path('login', auth_views.LoginView.as_view(template_name = 'employee_information/login.html',redirect_authenticated_user=True), name="login"),
-    path('userlogin', views.login_user, name="login-user"),
-    path('logout', views.logoutuser, name="logout"),
-    path('about', views.about, name="about-page"),
-    path('departments', views.departments, name="department-page"),
-    path('manage_departments', views.manage_departments, name="manage_departments-page"),
-    path('save_department', views.save_department, name="save-department-page"),
-    path('delete_department', views.delete_department, name="delete-department"),
-    path('positions', views.positions, name="position-page"),
-    path('manage_positions', views.manage_positions, name="manage_positions-page"),
-    path('save_position', views.save_position, name="save-position-page"),
-    path('delete_position', views.delete_position, name="delete-position"),
-    path('employees', views.employees, name="employee-page"),
-    path('manage_employees', views.manage_employees, name="manage_employees-page"),
-    path('save_employee', views.save_employee, name="save-employee-page"),
-    path('delete_employee', views.delete_employee, name="delete-employee"),
-    path('view_employee', views.view_employee, name="view-employee-page"),
+    path('admin/', admin.site.urls,name="admin-site"),
+    path('', include('employee_information.urls')),
 ]
